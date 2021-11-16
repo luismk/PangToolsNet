@@ -6,7 +6,6 @@ Baseado na biblioteca de: DaveDevil's - (Obrigado por compartilhar)
 
 Exemplo de uso: 
 
-//Caminho do arquivo
 string filePath = @"C:\\Users\\yourUserName\\desktop\\updatelist";
 string fileOutput = filePath + ".xml" ;
 
