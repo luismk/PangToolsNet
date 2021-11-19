@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -117,14 +117,15 @@ namespace UpdateList
         public OperacaoEnum CheckCryptDecrypt(string filePath)
         {
 
-
             if (!File.Exists(filePath))
                 throw new FileNotFoundException("Arquivo não encontrado");
 
-            //Lê arquivo
-            var data = File.ReadAllBytes(filePath);
+            //Ler arquivo e convert em char[]
+            var dataResult = Encoding.UTF8.GetChars(File.ReadAllBytes(filePath));
+        
 
-            var dataResult = Encoding.UTF8.GetChars(data);
+            //verifica se está decriptografado
+            // dica o arquivo criptografado inicia com ? >
             if (dataResult[0] == '<' && dataResult[1] == '?')
             {
                 Console.Write("Trying to Encrypt ... \n");
@@ -172,7 +173,7 @@ namespace UpdateList
         /// </summary>
         /// <param name="filePath">Caminho do arquivo</param>
         /// <param name="key">Chave do updatelist</param>
-        /// <param name="operacao">Decriptografar ou Criptografar</param>
+        /// <param name="decrypted">Decriptografado ou Criptografado</param>
         public Result DecryptEncryptFile(string filePath, out byte[] decrypted, KeyEnum key)
         {
 
@@ -244,8 +245,8 @@ namespace UpdateList
                     return Result.Test_New_Key;
                 }
             }
-
-            decrypted = dataResult;
+           string result = Encoding.UTF8.GetString(dataResult).Replace("\0", "");
+            decrypted = Encoding.UTF8.GetBytes(result);
             var getcurrentdirectory = Directory.GetCurrentDirectory();
             if (operacao == OperacaoEnum.Encrypt)
             {

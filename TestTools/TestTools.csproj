@@ -8,10 +8,11 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>TestTools</RootNamespace>
     <AssemblyName>TestTools</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -48,6 +49,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="updatelist">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UpdateList\UpdateList.csproj">
