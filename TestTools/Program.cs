@@ -11,9 +11,18 @@ namespace TestTools
             Console.WriteLine("Wait insert to file...");
             for (; ; )
             {
-                if (args.Length > 0)
+                var comando = Console.ReadLine().Split(new char[] { ' ' }, 2);
+                if (args.Length > 0|| System.IO.File.Exists(comando[0]))
                 {
-                    string filePath = args[0];
+                    string filePath = "updatelist";
+                    if (comando.Length > 0)
+                    {
+                        filePath = comando[0];
+                    }
+                    else if (args.Length > 0)
+                    {
+                        filePath = args[0];
+                    }
                     for (int i = 0; i < 6; i++)
                     {
                         var result = new FileCrypt().DecryptEncryptFile(filePath, out byte[] decrypted, (FileCrypt.KeyEnum)i);

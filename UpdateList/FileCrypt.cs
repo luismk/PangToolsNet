@@ -123,7 +123,10 @@ namespace UpdateList
             //Ler arquivo e convert em char[]
             var dataResult = Encoding.UTF8.GetChars(File.ReadAllBytes(filePath));
         
-
+            if(dataResult[0]=='^' && dataResult[1] =='J')
+            {
+                Console.WriteLine("UpdateList Decrypt...");
+            }
             //verifica se está decriptografado
             // dica o arquivo criptografado inicia com ? >
             if (dataResult[0] == '<' && dataResult[1] == '?')
@@ -241,20 +244,19 @@ namespace UpdateList
                 //If Decrypt fail ...
                 if (i == 0 && dataResult[0] != '<' && dataResult[1] != '?' && operacao == OperacaoEnum.Decrypt)
                 {
-                    decrypted = dataResult;
+                    decrypted = dataResult; 
                     return Result.Test_New_Key;
                 }
             }
-           string result = Encoding.UTF8.GetString(dataResult).Replace("\0", "");
-            decrypted = Encoding.UTF8.GetBytes(result);
             var getcurrentdirectory = Directory.GetCurrentDirectory();
+            decrypted = dataResult;
             if (operacao == OperacaoEnum.Encrypt)
             {
                 File.WriteAllBytes(getcurrentdirectory+ "\\updatelist_encrypt", decrypted);
             }
             else if (operacao == OperacaoEnum.Decrypt)
             {
-                File.WriteAllBytes(getcurrentdirectory+ "\\updatelist_decrypt.xml", decrypted);
+                File.WriteAllBytes(getcurrentdirectory+ "\\updatelist_decrypt.xml", Encoding.UTF8.GetBytes( (Encoding.UTF8.GetString(dataResult).Replace("\0", ""))));
             }
             return Result.Sucess;
         }
