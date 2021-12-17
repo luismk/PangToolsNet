@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{69CF4C15-CAFF-42CC-9E71-2A2B50543511}</ProjectGuid>
+    <ProjectGuid>{44E24277-FADA-4F78-A256-EEBE4A115878}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>GameGuard</RootNamespace>
-    <AssemblyName>GameGuard</AssemblyName>
+    <RootNamespace>PangyaPakMakerTest</RootNamespace>
+    <AssemblyName>PangyaPakMakerTest</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -22,7 +22,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -32,7 +31,6 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -52,9 +50,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PangyaGameGuardAPI\PangyaGameGuardAPI.csproj">
-      <Project>{9b403e74-421d-4662-a55b-bf51cdccaf7e}</Project>
-      <Name>PangyaGameGuardAPI</Name>
+    <ProjectReference Include="..\PangyaPakMaker\PangyaPakMaker.csproj">
+      <Project>{3da9162c-bf2e-4c4e-91de-9b63bdd0627c}</Project>
+      <Name>PangyaPakMaker</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

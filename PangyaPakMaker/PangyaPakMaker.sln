@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.31911.260
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PangyaPakMaker", "PangyaPakMaker.csproj", "{3DA9162C-BF2E-4C4E-91DE-9B63BDD0627C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PangyaPakMakerTest", "..\PangyaPakMakerTest\PangyaPakMakerTest.csproj", "{44E24277-FADA-4F78-A256-EEBE4A115878}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3DA9162C-BF2E-4C4E-91DE-9B63BDD0627C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DA9162C-BF2E-4C4E-91DE-9B63BDD0627C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DA9162C-BF2E-4C4E-91DE-9B63BDD0627C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DA9162C-BF2E-4C4E-91DE-9B63BDD0627C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44E24277-FADA-4F78-A256-EEBE4A115878}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44E24277-FADA-4F78-A256-EEBE4A115878}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44E24277-FADA-4F78-A256-EEBE4A115878}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44E24277-FADA-4F78-A256-EEBE4A115878}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {01B998E1-D8A1-4F5C-813E-E4974D82C633}
+	EndGlobalSection
+EndGlobal

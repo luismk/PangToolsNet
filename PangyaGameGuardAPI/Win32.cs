@@ -11,7 +11,7 @@ namespace PangyaGameGuardAPI
     /// <summary>
     /// WinAPI Imports
     /// </summary>
-    public class Win32
+    public class WinCrypt
     {
         #region Import func dll
         [DllImport("advapi32.dll", CharSet = CharSet.Auto, SetLastError = true)]
@@ -117,7 +117,7 @@ namespace PangyaGameGuardAPI
 
         #endregion
 
-        public Win32()
+        public WinCrypt()
         {
             hProv = IntPtr.Zero;
             hKey = IntPtr.Zero;
@@ -190,7 +190,7 @@ namespace PangyaGameGuardAPI
         }
 
 
-        public bool EncryptData(byte[] HASHKEY, ref byte[] buff, uint len, ref string outFileName)
+        public bool EncryptData(byte[] HASHKEY, ref byte[] buff, uint len)
         {
 
             int ret = 0;
@@ -217,55 +217,48 @@ namespace PangyaGameGuardAPI
             return ret != 0;
         }
 
-        public bool SetupCrypt()
+        public bool SetupCrypt(string Provider = "Microsoft Base Cryptographic Provider v1.0" )
         {
             bool ret = false;
-            if (CryptAcquireContext(out hProv, null, "Microsoft Base Cryptographic Provider v1.0", PROV_RSA_FULL, CRYPT_VERIFYCONTEXT))
+            if (CryptAcquireContext(out hProv, null, Provider, PROV_RSA_FULL, CRYPT_VERIFYCONTEXT))
             {
                 ret = true;
             }
             return ret;
         }
        
-        public bool CreateSignature(byte[] RSAKEY, ref byte[] data, uint dSize, ref string hash)
+        public bool CreateSignature(byte[] RSAKEY, ref byte[] data, uint dSize, ref byte[] hash)
         {
-            IntPtr hHash = IntPtr.Zero;
             bool ret = false;
-            if (hHash != IntPtr.Zero)
-            {
-                CryptDestroyHash(hHash);
-            }
-            if (!CryptCreateHash(hProv, CALG_MD5, IntPtr.Zero, 0, out hHash))
+            if (!CryptCreateHash(hProv, CALG_MD5, IntPtr.Zero, 0, out IntPtr hHash))
             {
                 Console.Write("Failed to create hash: {0:D}");
             }
-            Console.Write("0x{0:x}", CALG_MD5);
             if (!CryptImportKey(hProv, RSAKEY, RSAKEY.Length, IntPtr.Zero, 0, ref hKey))
             {
                 Console.Write("Failed to import key: {0:x}");
             }
-            if (!CryptHashData(hHash, data, data.Length, 0))
+            if (!CryptHashData(hHash, data,(int)dSize - 1, 0))
             {
                 Console.Write("Failed to import key: {0:x}");
             }
             int temp = 0x40;
-            if (CryptGetHashParam(hHash, 4, data, ref temp, 0))
+            if (CryptGetHashParam(hHash, 0x0004, data, ref temp, 0))
             {
 
             }
-            Console.Write("{0:x}", Encoding.UTF8.GetString(data).Length);
             byte[] pBuffer = new byte[temp];
             if (CryptGetHashParam(hHash, HP_HASHVAL, pBuffer, ref temp, 0))
             {
                 ret = true;
             }
-            hash = Encoding.UTF8.GetString(pBuffer);
             CryptDestroyHash(hHash);
             CryptDestroyKey(hKey);
+            hash = data;
             return ret;
         }
 
-        public void ConcatCharStar(ref byte[] srcBuff, ref byte[] dstBuff, int len, int offset)
+        public void ConcatCharStar(byte[] srcBuff, ref byte[] dstBuff, int len, int offset =0)
         {
             for (int i = offset; i < len; i++)
             {

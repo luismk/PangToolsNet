@@ -1,15 +1,16 @@
 ﻿using PangyaGameGuardAPI;
 using System;
 using System.IO;
+using System.Runtime.InteropServices;
 
 namespace GameGuard
 {
 
     internal class Program
     {
-
         static void Main(string[] args)
         {
+            var test = new Crypts().RSAKEY;
             Console.Title = "PangToolsNet - GameGuard Files";
             Console.WriteLine("by LuisMK\n");
             HelpCommand();
@@ -17,30 +18,26 @@ namespace GameGuard
             for (; ; )
             {
                 var comando = Console.ReadLine().Split(new char[] { ' ' }, 2);
-                if (args.Length > 0 || System.IO.File.Exists(comando[0]))
+                if (File.Exists(comando[1]))
                 {
                     string filePath = "PangyaUS.ini";
                     var gg = new Crypts();
                     if (comando.Length > 0)
                     {
-                        filePath = comando[0];
-                    }
-                    else if (args.Length > 0)
-                    {
-                        filePath = args[0];
+                        filePath = comando[1];
                     }
                     switch (comando[0])
                     {
                         case "decrypt":
                             {
-                                string outfile = Path.GetFileNameWithoutExtension(filePath).ToLower() + "Dec.ini";
+                                string outfile = Path.GetFileNameWithoutExtension(filePath) + "_Dec.ini";
                                 gg.DecryptINI(ref filePath, ref outfile);
                                 gg.Log();
                             }
                             break;
                             case "encrypt":
                             {
-                                string outfile = Path.GetFileNameWithoutExtension(filePath).ToLower() + "En.ini";
+                                string outfile = Path.GetFileNameWithoutExtension(filePath) + "_En.ini";
                                 gg.EncryptINI(ref filePath, ref outfile);
                             }
                             break;
@@ -48,11 +45,11 @@ namespace GameGuard
                             { }
                             break;
                     }
-                    Console.Title = $"PangToolsNet - Pangya GameGuard - File: { Path.GetFileNameWithoutExtension(filePath).ToLower()}.ini - Sign1: {gg.GGHeader.Sign1} - Sign2: {gg.GGHeader.Sign2}";
+                    Console.Title = $"PangToolsNet - Pangya GameGuard - File: { Path.GetFileNameWithoutExtension(filePath)}.ini - Sign1: {gg.GGHeader.GameGuardTwo.Sign1} - Sign2: {gg.GGHeader.GameGuardTwo.Sign2}";
                 }
                 Console.ReadLine();
+                Console.WriteLine();
             }
-
         }
 
         static void HelpCommand()
